@@ -1,192 +1,134 @@
-// import 'package:flutter/material.dart';
-// import 'package:login/resueable/reuseable_widget.dart';
-
-// class UserDetailsPage extends StatefulWidget {
-//   @override
-//   _UserDetailsPageState createState() => _UserDetailsPageState();
-// }
-
-// class _UserDetailsPageState extends State<UserDetailsPage> {
-//   final _formKey = GlobalKey<FormState>();
-//   String _fullName = '';
-//   String _address = '';
-//   String _emailAddress = '';
-//   String _phoneNumber = '';
-//   TextEditingController _fullNameController = TextEditingController();
-//   TextEditingController _addressController = TextEditingController();
-//   TextEditingController _emailAddressController = TextEditingController();
-//   TextEditingController _phoneNumberController = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Edit Profile'),
-//       ),
-//       body: SingleChildScrollView(
-//         padding: const EdgeInsets.all(16),
-//         child: Form(
-//           key: _formKey,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               const SizedBox(height: 16),
-//               const Text(
-//                 'Primary Details',
-//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//               const SizedBox(height: 16),
-//               reusableAddressField(
-//                 "Full Name",
-//                 false,
-//                 false,
-//                 _fullNameController,
-//               ),
-//               const SizedBox(height: 16),
-//               reusableAddressField(
-//                 "Address",
-//                 true,
-//                 false,
-//                 _addressController,
-//               ),
-//               const SizedBox(height: 32),
-//               const Text(
-//                 'Contact Information',
-//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//               const SizedBox(height: 16),
-//               reusableAddressField(
-//                 "Email Address",
-//                 false,
-//                 true,
-//                 _emailAddressController,
-//               ),
-//               const SizedBox(height: 16),
-//               reusableAddressField(
-//                 "Phone",
-//                 false,
-//                 false,
-//                 _phoneNumberController,
-//                 isPhone: true,
-//               ),
-//               const SizedBox(height: 32),
-//               ElevatedButton(
-//                 onPressed: () {
-//                   if (_formKey.currentState!.validate()) {
-//                     _formKey.currentState!.save();
-//                     // Handle form submission here
-//                     // Save changes
-//                     _fullName = _fullNameController.text;
-//                     _address = _addressController.text;
-//                     _emailAddress = _emailAddressController.text;
-//                     _phoneNumber = _phoneNumberController.text;
-//                     print(_fullName);
-//                     // Perform further actions like updating the database
-//                   }
-//                 },
-//                 child: const Text('Save Changes'),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   void dispose() {
-//     // Clean up the controllers when the widget is disposed
-//     _fullNameController.dispose();
-//     _addressController.dispose();
-//     _emailAddressController.dispose();
-//     _phoneNumberController.dispose();
-//     super.dispose();
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EditProfilePage extends StatefulWidget {
-  final String currentName;
-  final String currentNumber;
-  final String currentEmail;
-
-  EditProfilePage({
-    required this.currentName,
-    required this.currentNumber,
-    required this.currentEmail,
-  });
-
+class OrgDetails extends StatefulWidget {
+  final Function(Map<String, dynamic>) setProfileItem;
+  Map<String, dynamic> profileItem;
+  OrgDetails({required this.setProfileItem, required this.profileItem});
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  _OrgDetailsState createState() => _OrgDetailsState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
-  late TextEditingController _nameController;
-  late TextEditingController _numberController;
-  late TextEditingController _emailController;
+class _OrgDetailsState extends State<OrgDetails> {
+  late TextEditingController _organizationNameController;
+  late TextEditingController _wasteCategoriesController;
+  late TextEditingController _contactDetailsController;
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.currentName);
-    _numberController = TextEditingController(text: widget.currentNumber);
-    _emailController = TextEditingController(text: widget.currentEmail);
+    _organizationNameController = TextEditingController();
+    _wasteCategoriesController = TextEditingController();
+    _contactDetailsController = TextEditingController();
+    _loadOrgDetails(); // Load organization details from shared preferences
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _numberController.dispose();
-    _emailController.dispose();
+    _organizationNameController.dispose();
+    _wasteCategoriesController.dispose();
+    _contactDetailsController.dispose();
     super.dispose();
+  }
+
+  String? _contactDetailsError;
+  bool _isValidEmail(String email) {
+    // Email regex pattern
+    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('User Profile'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _numberController,
-              decoration: InputDecoration(labelText: 'Number'),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Save the updated profile data
-                final updatedName = _nameController.text;
-                final updatedNumber = _numberController.text;
-                final updatedEmail = _emailController.text;
-
-                // Navigate back to profile page with updated data
-                Navigator.pop(context, {
-                  'name': updatedName,
-                  'number': updatedNumber,
-                  'email': updatedEmail,
-                });
-              },
-              child: Text('Confirm'),
-            ),
-          ],
+        padding: EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                controller: _organizationNameController,
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                controller: _wasteCategoriesController,
+                decoration: InputDecoration(
+                  labelText: 'Contact Number',
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: _contactDetailsController,
+                onChanged: (value) {
+                  setState(() {
+                    if (_isValidEmail(value)) {
+                      _contactDetailsError = null; // No error if email is valid
+                    } else {
+                      _contactDetailsError =
+                          'Enter a valid email'; // Error message if email is invalid
+                    }
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: 'E-mail Address',
+                  errorText:
+                      _contactDetailsError, // Display error message if email is invalid
+                ),
+              ),
+              SizedBox(height: 20), // Add space between TextField and Button
+              ElevatedButton(
+                onPressed: () => _saveOrgDetails(context),
+                child: Text('Save'),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<void> _loadOrgDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _organizationNameController.text =
+          prefs.getString('organizationName') ?? '';
+      _wasteCategoriesController.text =
+          prefs.getString('wasteCategories') ?? '';
+      _contactDetailsController.text = prefs.getString('contactDetails') ?? '';
+    });
+  }
+
+  Future<void> _saveOrgDetails(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('organizationName', _organizationNameController.text);
+    prefs.setString('wasteCategories', _wasteCategoriesController.text);
+    prefs.setString('contactDetails', _contactDetailsController.text);
+    widget.setProfileItem({
+      'Name': _organizationNameController.text,
+      'Waste': _wasteCategoriesController.text,
+      'contactDetails': _contactDetailsController.text,
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('User details saved')),
+    );
+
+    Navigator.pop(context, {
+      'name': _organizationNameController.text,
+      'number': _wasteCategoriesController.text,
+      'email': _contactDetailsController.text,
+    });
   }
 }

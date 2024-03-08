@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glass_kit/glass_kit.dart';
+import 'package:userhomepage/pages/report.dart';
+import 'package:userhomepage/pages/schedule.dart';
 
 class HomeDetails extends StatelessWidget {
   @override
@@ -29,17 +31,18 @@ class HomeDetails extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 1, 0, 19), // #4F4D98
-                  Color.fromARGB(255, 11, 0, 40), // #6B4487
-                  Color.fromARGB(255, 3, 0, 49), // #5E3B76
-                  Color.fromARGB(255, 5, 0, 74), // #503365
-                  Color.fromARGB(255, 0, 1, 79), // #432655
-                ],
-              ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   colors: [
+              //     Color.fromARGB(255, 1, 0, 19), // #4F4D98
+              //     Color.fromARGB(255, 11, 0, 40), // #6B4487
+              //     Color.fromARGB(255, 3, 0, 49), // #5E3B76
+              //     Color.fromARGB(255, 5, 0, 74), // #503365
+              //     Color.fromARGB(255, 0, 1, 79), // #432655
+              //   ],
+              // ),
+              color: Color.fromARGB(255, 21, 24, 29),
             ),
             child: Column(
               children: [
@@ -283,6 +286,59 @@ class HomeDetails extends StatelessWidget {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          // Navigate to UserSchedule page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserSchedule(),
+                            ),
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 101, 173, 255),
+                          ),
+                        ),
+                        icon: Icon(Icons.schedule_outlined,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        label: Text('Schedule',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            )),
+                      ),
+                    ),
+                    SizedBox(width: 8), // Add spacing between buttons
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          // Navigate to ReportPage
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ReportPage(),
+                            ),
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 101, 173, 255),
+                          ),
+                        ),
+                        icon: Icon(Icons.report,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        label: Text('Report',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            )),
                       ),
                     ),
                   ],

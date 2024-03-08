@@ -29,28 +29,30 @@ class _ReportPageState extends State<ReportPage> {
             'Report',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 3, 0, 41),
+          backgroundColor: Color.fromARGB(255, 21, 24, 29),
         ),
         body: SingleChildScrollView(
           child: Container(
+            // child: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  // Use the same colors as in HomeDetails here
-                  Color.fromARGB(255, 1, 0, 19), // #4F4D98
-                  Color.fromARGB(255, 11, 0, 40), // #6B4487
-                  Color.fromARGB(255, 3, 0, 49), // #5E3B76
-                  Color.fromARGB(255, 5, 0, 74), // #503365
-                  Color.fromARGB(255, 0, 1, 79), // #6B4487
-                  // ... other colors
-                ],
-              ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   colors: [
+              //     // Use the same colors as in HomeDetails here
+              //     Color.fromARGB(255, 1, 0, 19), // #4F4D98
+              //     Color.fromARGB(255, 11, 0, 40), // #6B4487
+              //     Color.fromARGB(255, 3, 0, 49), // #5E3B76
+              //     Color.fromARGB(255, 5, 0, 74), // #503365
+              //     Color.fromARGB(255, 0, 1, 79), // #6B4487
+              //     // ... other colors
+              //   ],
+              // ),
+              color: Color.fromARGB(255, 21, 24, 29),
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(height: 16),
                 const Text(

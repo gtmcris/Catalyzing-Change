@@ -42,6 +42,8 @@ dependencies:
   glass_kit: ^3.0.0
   shared_preferences: ^2.2.0
   provider: ^6.1.1
+  flutter_native_splash: ^2.3.10
+
 
 dev_dependencies:
   flutter_test:
