@@ -67,13 +67,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   onTap: _selectProfileImage,
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundColor: Color.fromARGB(255, 103, 156, 255),
+                    backgroundColor: Color.fromARGB(255, 241, 246, 251),
                     backgroundImage: _image != null ? FileImage(_image!) : null,
                     child: _image == null
                         ? Icon(
                             Icons.add_a_photo,
                             size: 40,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(255, 19, 11, 61),
                           )
                         : null,
                   ),
@@ -82,14 +82,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
               SizedBox(height: 20),
               Card(
                 margin: EdgeInsets.symmetric(horizontal: 20),
-                color: Color.fromARGB(255, 103, 156, 255),
+                color: Color.fromARGB(255, 241, 246, 251),
                 child: ListTile(
                   title: Text(
                     'Name: $_userName',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 19, 11, 61),
                     ),
                   ),
                   subtitle: Column(
@@ -100,7 +100,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 19, 11, 61),
                         ),
                       ),
                       Text(
@@ -108,7 +108,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 19, 11, 61),
                         ),
                       ),
                     ],
@@ -116,7 +116,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   trailing: IconButton(
                     icon: Icon(
                       Icons.edit,
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 19, 11, 61),
                     ),
                     onPressed: () {
                       // Navigate to edit profile page
@@ -158,14 +158,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 101, 173, 255),
+                        Color.fromARGB(255, 241, 246, 251),
                       ),
                     ),
                     icon: Icon(Icons.settings,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                        color: Color.fromARGB(255, 19, 11, 61)),
                     label: Text('Preferences',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Color.fromARGB(255, 19, 11, 61),
                         )),
                   ),
                   ElevatedButton.icon(
@@ -175,14 +175,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 101, 173, 255),
+                        Color.fromARGB(255, 241, 246, 251),
                       ),
                     ),
                     icon: Icon(Icons.notifications,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                        color: Color.fromARGB(255, 19, 11, 61)),
                     label: Text('Notifications',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Color.fromARGB(255, 19, 11, 61),
                         )),
                   ),
                 ],

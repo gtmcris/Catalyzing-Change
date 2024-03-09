@@ -305,14 +305,14 @@ class HomeDetails extends StatelessWidget {
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Color.fromARGB(255, 101, 173, 255),
+                            Color.fromARGB(255, 241, 246, 251),
                           ),
                         ),
                         icon: Icon(Icons.schedule_outlined,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                            color: Color.fromARGB(255, 19, 11, 61)),
                         label: Text('Schedule',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Color.fromARGB(255, 19, 11, 61),
                             )),
                       ),
                     ),
@@ -330,14 +330,14 @@ class HomeDetails extends StatelessWidget {
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Color.fromARGB(255, 101, 173, 255),
+                            Color.fromARGB(255, 241, 246, 251),
                           ),
                         ),
                         icon: Icon(Icons.report,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                            color: Color.fromARGB(255, 19, 11, 61)),
                         label: Text('Report',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Color.fromARGB(255, 19, 11, 61),
                             )),
                       ),
                     ),

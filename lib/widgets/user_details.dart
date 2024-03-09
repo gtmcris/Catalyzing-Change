@@ -53,21 +53,28 @@ class _OrgDetailsState extends State<OrgDetails> {
             children: <Widget>[
               TextField(
                 controller: _organizationNameController,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(
+                      r'^[a-zA-Z\s]*$')), // Allow only letters and whitespaces
+                ],
                 decoration: InputDecoration(
                   labelText: 'Name',
                 ),
               ),
+
               SizedBox(height: 20),
               TextField(
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(10), // Limit to 10 digits
                 ],
                 controller: _wasteCategoriesController,
                 decoration: InputDecoration(
                   labelText: 'Contact Number',
                 ),
               ),
+
               SizedBox(height: 20),
               TextField(
                 keyboardType: TextInputType.emailAddress,
