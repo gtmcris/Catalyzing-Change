@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:userhomepage/widgets/user_details.dart';
+import 'package:userhomepage/widgets/profile widgets/qrcodegen.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -181,6 +182,37 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     icon: Icon(Icons.notifications,
                         color: Color.fromARGB(255, 19, 11, 61)),
                     label: Text('Notifications',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 19, 11, 61),
+                        )),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      // Navigate to preferences page
+                      // You can implement navigation logic here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QRCodeGen(
+                            phoneNumber: _userNumber,
+                          ),
+                        ),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromARGB(255, 241, 246, 251),
+                      ),
+                    ),
+                    icon: Icon(Icons.qr_code,
+                        color: Color.fromARGB(255, 19, 11, 61)),
+                    label: Text('QR Code',
                         style: TextStyle(
                           color: Color.fromARGB(255, 19, 11, 61),
                         )),
